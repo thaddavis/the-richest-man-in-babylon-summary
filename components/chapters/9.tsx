@@ -1,13 +1,18 @@
 import React from "react";
+import { LessonStyled } from "styled/Lesson.styled";
 
-export function Fable9() {
+interface P {
+  title: string;
+}
+
+export function Fable9({ title }: P) {
   return (
-    <>
-      <h1>9</h1>
+    <LessonStyled>
+      <h2>{title}</h2>
       <p>
-        If you have debts allocate at least 20% of your earnings towards paying
-        them.
+        If you have debts then allocate at least 20% of your earnings towards
+        paying them.
       </p>
-    </>
+    </LessonStyled>
   );
 }

@@ -1,10 +1,15 @@
 import React from "react";
+import { LessonStyled } from "styled/Lesson.styled";
 
-export function Fable1() {
+interface P {
+  title: string;
+}
+
+export function Fable1({ title }: P) {
   return (
-    <>
-      <h1>1</h1>
+    <LessonStyled>
+      <h2>{title}</h2>
       <p>Seek the counsel of the wise and rich.</p>
-    </>
+    </LessonStyled>
   );
 }

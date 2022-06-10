@@ -1,12 +1,17 @@
 import React from "react";
+import { LessonStyled } from "styled/Lesson.styled";
 
-export function Fable10() {
+interface P {
+  title: string;
+}
+
+export function Fable10({ title }: P) {
   return (
-    <>
-      <h1>10</h1>
+    <LessonStyled>
+      <h2>{title}</h2>
       <p>
         Take pride and pleasure in the work that you do, no matter what it is.
       </p>
-    </>
+    </LessonStyled>
   );
 }

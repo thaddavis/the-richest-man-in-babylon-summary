@@ -1,26 +1,20 @@
+import { List } from "components/shared/List";
+import { ListOfLessonsInFable3 } from "data/LessonData.ts/3";
 import React from "react";
+import { BsDot } from "react-icons/bs";
+import { LessonStyled } from "styled/Lesson.styled";
 
-export function Fable3() {
+interface P {
+  title: string;
+}
+
+export function Fable3({ title }: P) {
   return (
-    <>
-      <h1>3</h1>
-      <ol>
-        <li>Save at least 10% of everything you earn.</li>
-        <li>Cut all unnecessary expenses.</li>
-        <li>Invest your savings.</li>
-        <li>
-          Consult with wise men to ensure your savings are invested safely.
-        </li>
-        <li>Own at least one property.</li>
-        <li>
-          Prepare your finances in your youth as you will not be able to work as
-          hard as you age.
-        </li>
-        <li>
-          Study, become wiser, and always gain new skills in your talents to
-          increase your ability to earn.
-        </li>
-      </ol>
-    </>
+    <LessonStyled>
+      <h2>{title}</h2>
+      <div className="section">
+        <List listData={ListOfLessonsInFable3} />
+      </div>
+    </LessonStyled>
   );
 }

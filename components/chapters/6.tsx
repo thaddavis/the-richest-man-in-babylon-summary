@@ -1,14 +1,19 @@
 import React from "react";
+import { LessonStyled } from "styled/Lesson.styled";
 
-export function Fable6() {
+interface P {
+  title: string;
+}
+
+export function Fable6({ title }: P) {
   return (
-    <>
-      <h1>6</h1>
+    <LessonStyled>
+      <h2>{title}</h2>
       <p>
         It better to air on the side of caution when investing your money. A low
         risk investment with a guaranteed return is the best way to avoid
         losses.
       </p>
-    </>
+    </LessonStyled>
   );
 }

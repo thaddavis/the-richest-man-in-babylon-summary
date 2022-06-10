@@ -1,20 +1,19 @@
+import { List } from "components/shared/List";
+import { ListOfLessonsInFable4 } from "data/LessonData.ts/4";
 import React from "react";
+import { LessonStyled } from "styled/Lesson.styled";
 
-export function Fable4() {
+interface P {
+  title: string;
+}
+
+export function Fable4({ title }: P) {
   return (
-    <>
-      <h1>4</h1>
-      <ol>
-        <li>
-          Take advantage of every opportunity that comes your way. Opportunities
-          to gain wealth come to all.
-        </li>
-        <li>
-          More opportunities come to those who actively prepare for them. Do not
-          procrastinate in seeking and preparing for the opportunities you
-          desire.
-        </li>
-      </ol>
-    </>
+    <LessonStyled>
+      <h2>{title}</h2>
+      <div className="section">
+        <List listData={ListOfLessonsInFable4} />
+      </div>
+    </LessonStyled>
   );
 }
