@@ -11,9 +11,15 @@ interface P {
   isOpen: boolean;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
   sectionRefs: MutableRefObject<Record<number, HTMLDivElement>>;
+  currentSection: string | undefined;
 }
 
-export function SideDrawer({ isOpen, setIsOpen, sectionRefs }: P) {
+export function SideDrawer({
+  isOpen,
+  setIsOpen,
+  sectionRefs,
+  currentSection,
+}: P) {
   return (
     <>
       <SideDrawerStyled isOpen={isOpen}>
@@ -37,10 +43,15 @@ export function SideDrawer({ isOpen, setIsOpen, sectionRefs }: P) {
               return (
                 <li
                   key={i.name}
+                  className={currentSection === i.key ? "active" : ""}
                   onClick={() => {
                     gsap.to(window, {
                       duration: 2,
-                      scrollTo: sectionRefs.current[i.key].offsetTop - 10,
+                      scrollTo:
+                        sectionRefs.current[i.key].offsetTop -
+                        (document.getElementById("header")
+                          ? document.getElementById("header")!.clientHeight
+                          : 72),
                     });
                   }}
                 >

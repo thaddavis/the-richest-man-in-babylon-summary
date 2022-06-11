@@ -4,11 +4,12 @@ import { LessonStyled } from "styled/Lesson.styled";
 interface P {
   title: string;
   ref: React.Ref<HTMLElement>;
+  id: string;
 }
 
 const Fable10 = React.forwardRef<HTMLDivElement, P>((props, ref) => {
   return (
-    <LessonStyled ref={ref}>
+    <LessonStyled id={props.id} ref={ref}>
       <h2>{props.title}</h2>
       <p>
         Take pride and pleasure in the work that you do, no matter what it is.

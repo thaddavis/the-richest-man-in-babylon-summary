@@ -11,17 +11,19 @@ import { useMountTransition } from "hooks/useMountTransition";
 interface P {
   children: React.ReactNode;
   sectionRefs: MutableRefObject<Record<number, HTMLDivElement>>;
+  currentSection: string | undefined;
 }
 
 export const MainLayout = (props: P) => {
   const [isOpen, setIsOpen] = useState(false);
   const hasTransitionedIn = useMountTransition(isOpen, 1000);
-  const { sectionRefs } = props;
+  const { sectionRefs, currentSection } = props;
 
   return (
     <MainLayoutStyled>
       <section id="side-drawer">
         <SideDrawer
+          currentSection={currentSection}
           sectionRefs={sectionRefs}
           isOpen={isOpen}
           setIsOpen={setIsOpen}
@@ -29,9 +31,12 @@ export const MainLayout = (props: P) => {
         {/* {(hasTransitionedIn || isOpen) && (
           <Backdrop isOpen={isOpen} onClick={() => setIsOpen(false)} />
         )} */}
+        {isOpen && (
+          <Backdrop isOpen={isOpen} onClick={() => setIsOpen(false)} />
+        )}
       </section>
 
-      <header>
+      <header id="header">
         <MenuButton
           role={"button"}
           onClick={() => {

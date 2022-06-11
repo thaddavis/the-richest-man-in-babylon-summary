@@ -15,36 +15,64 @@ import { Fable10 } from "../components/chapters/10";
 import BasicLayout from "layout/Basic";
 import { MainLayout } from "layout/MainLayout";
 import { navOptions } from "data/navOptions";
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import { gsap } from "gsap/dist/gsap";
 import { ScrollToPlugin } from "gsap/dist/ScrollToPlugin";
+import { createScrollTriggers } from "helpers/createScrollTriggers";
+
 gsap.registerPlugin(ScrollToPlugin);
 
-const Title = styled.h1`
-  color: red;
-  font-size: 16vmin;
-  text-align: center;
-  padding: 0.4em;
+const SectionHeader = styled.div`
+  height: auto;
+  min-height: 20vh;
 
-  @media only screen and (min-width: ${(props) => props.theme.breakpoints.md}) {
-    font-size: 4em;
+  cursor: pointer;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  margin-bottom: 4em;
+
+  h1 {
+    word-break: spaces;
+    text-overflow: ellipsis;
+    font-size: 16vmin;
+    text-align: center;
+    padding: 0.6em;
+    padding-bottom: 0.2em;
+    color: ${(props) => props.theme.colors.red};
   }
-`;
 
-const SubTitle = styled.h2`
-  color: red;
-  font-size: 8vmin;
-  text-align: center;
-  padding: 0.4em;
+  h2 {
+    color: red;
+    font-size: 8vmin;
+    text-align: center;
+
+    @media only screen and (min-width: ${(props) =>
+        props.theme.breakpoints.md}) {
+      font-size: 2em;
+    }
+  }
 
   @media only screen and (min-width: ${(props) => props.theme.breakpoints.md}) {
-    font-size: 2em;
+    h1 {
+      font-size: 4em;
+      margin-bottom: 0.5em;
+    }
   }
 `;
 
 const Home: NextPage = () => {
-  const sectionRefs = useRef<Record<number, HTMLDivElement>>({});
+  const sectionRefs = useRef<Record<string, HTMLDivElement>>({});
+
+  const [currentSection, setCurrentSection] = useState<string>();
+
+  useEffect(() => {
+    createScrollTriggers(sectionRefs, currentSection, setCurrentSection);
+  }, []);
 
   const addToRefs = (el: any, key: number) => {
     if (el && !sectionRefs.current[key]) {
@@ -60,18 +88,23 @@ const Home: NextPage = () => {
       </Head>
 
       <BasicLayout>
-        <MainLayout sectionRefs={sectionRefs}>
+        <MainLayout currentSection={currentSection} sectionRefs={sectionRefs}>
           <main id="main-panel">
             <nav id="left-overview">
               <ul>
                 {navOptions.map((i, idx) => {
                   return (
                     <li
+                      className={i.key === currentSection ? "active" : ""}
                       key={i.name}
                       onClick={() => {
                         gsap.to(window, {
                           duration: 2,
-                          scrollTo: sectionRefs.current[i.key].offsetTop - 10,
+                          scrollTo:
+                            sectionRefs.current[i.key].offsetTop -
+                            (document.getElementById("header")
+                              ? document.getElementById("header")!.clientHeight
+                              : 72),
                         });
                       }}
                     >
@@ -82,18 +115,26 @@ const Home: NextPage = () => {
               </ul>
             </nav>
             <div id="right-content">
-              <Title>The Richest Man In Babylon</Title>
-              <SubTitle>George S. Clason</SubTitle>
-              <Fable1 title={"1"} ref={(el) => addToRefs(el, 1)} />
-              <Fable2 title={"2"} ref={(el) => addToRefs(el, 2)} />
-              <Fable3 title={"3"} ref={(el) => addToRefs(el, 3)} />
-              <Fable4 title={"4"} ref={(el) => addToRefs(el, 4)} />
-              <Fable5 title={"5"} ref={(el) => addToRefs(el, 5)} />
-              <Fable6 title={"6"} ref={(el) => addToRefs(el, 6)} />
-              <Fable7 title={"7"} ref={(el) => addToRefs(el, 7)} />
-              <Fable8 title={"8"} ref={(el) => addToRefs(el, 8)} />
-              <Fable9 title={"9"} ref={(el) => addToRefs(el, 9)} />
-              <Fable10 title={"10"} ref={(el) => addToRefs(el, 10)} />
+              <div id="overflow-wrapper">
+                <SectionHeader>
+                  <h1>The Richest Man In Babylon</h1>
+                  <h2>George S. Clason</h2>
+                </SectionHeader>
+                <Fable1 id={"1"} title={"1"} ref={(el) => addToRefs(el, 1)} />
+                <Fable2 id={"2"} title={"2"} ref={(el) => addToRefs(el, 2)} />
+                <Fable3 id={"3"} title={"3"} ref={(el) => addToRefs(el, 3)} />
+                <Fable4 id={"4"} title={"4"} ref={(el) => addToRefs(el, 4)} />
+                <Fable5 id={"5"} title={"5"} ref={(el) => addToRefs(el, 5)} />
+                <Fable6 id={"6"} title={"6"} ref={(el) => addToRefs(el, 6)} />
+                <Fable7 id={"7"} title={"7"} ref={(el) => addToRefs(el, 7)} />
+                <Fable8 id={"8"} title={"8"} ref={(el) => addToRefs(el, 8)} />
+                <Fable9 id={"9"} title={"9"} ref={(el) => addToRefs(el, 9)} />
+                <Fable10
+                  id={"10"}
+                  title={"10"}
+                  ref={(el) => addToRefs(el, 10)}
+                />
+              </div>
             </div>
           </main>
         </MainLayout>

@@ -5,7 +5,7 @@ interface StyledProps {
   isOpen: boolean;
 }
 
-const BackgroundDiv = styled.div<Pick<StyledProps, "isOpen">>`
+const BackgroundDivWithAnimation = styled.div<Pick<StyledProps, "isOpen">>`
   position: fixed;
   width: 100%;
   height: 100%;
@@ -33,6 +33,16 @@ const BackgroundDiv = styled.div<Pick<StyledProps, "isOpen">>`
       opacity: 0;
     }
   }
+`;
+
+const BackgroundDiv = styled.div<Pick<StyledProps, "isOpen">>`
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0);
+  z-index: 100;
+  top: 0;
+  left: 0;
 `;
 
 interface Props {

@@ -5,7 +5,7 @@ import reset from "styled-reset";
 import { defaultTheme } from "styled/Theme";
 
 export const GlobalStyle = createGlobalStyle`
-    // this is the shared style
+  // this is the shared style
   html {
     box-sizing: border-box;
 

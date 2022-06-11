@@ -2,11 +2,14 @@ import styled from "styled-components";
 
 export const MainLayoutStyled = styled.div`
   header {
+    background: white;
+    position: sticky;
+    top: 0;
     display: flex;
     flex: 1;
-    padding: 1em 0.4em;
+    padding: 1em 0.6em;
     border-bottom: 1px solid #eaeaea;
-    justify-content: flex-end;
+    justify-content: flex-start;
     align-items: center;
   }
 
@@ -41,7 +44,7 @@ export const MainLayoutStyled = styled.div`
       display: none;
       position: -webkit-sticky; /* Safari */
       position: sticky;
-      top: 0;
+      top: calc(40px + 2em + 1px);
       
       @media only screen and (min-width: ${(props) =>
         props.theme.breakpoints.xl}) {
@@ -57,7 +60,7 @@ export const MainLayoutStyled = styled.div`
         }
       }
   
-      & ul {
+      ul {
         overflow: auto;
   
         li {
@@ -71,12 +74,20 @@ export const MainLayoutStyled = styled.div`
           transition: 0.3s;
           caret-color: transparent;
           
+          &.active {
+            color: ${(props) => props.theme.colors.red};
+          }
+
         }
       }
     
     }
   
     & #right-content {
+      & #overflow-wrapper {
+        overflow-x: hidden;
+      }
+
       @media only screen and (min-width: ${(props) =>
         props.theme.breakpoints.xl}) {
           // background: pink;
@@ -85,8 +96,6 @@ export const MainLayoutStyled = styled.div`
       }
     }
   }
-
-  
 
   footer {
     display: flex;

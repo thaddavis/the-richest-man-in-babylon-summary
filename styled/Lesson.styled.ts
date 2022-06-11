@@ -5,6 +5,11 @@ interface StyledProps {
 }
 
 export const LessonStyled = styled.div`
+  height: auto;
+  min-height: 50vh;
+
+  // width: calc(90% - 4em);
+
   margin: 2em;
   padding: 2em 3em;
 
@@ -48,7 +53,13 @@ export const LessonStyled = styled.div`
   }
 
   p {
-    line-height: 1.1em;
+    line-height: 2;
+    font-size: 10vmin;
     text-align: center;
+
+    @media only screen and (min-width: ${(props) =>
+        props.theme.breakpoints.md}) {
+      font-size: 1.4em;
+    }
   }
 `;
