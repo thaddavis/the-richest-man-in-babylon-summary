@@ -1,10 +1,7 @@
 import type { NextPage } from "next";
 import Head from "next/head";
-import Image from "next/image";
 import styled from "styled-components";
 
-import styles from "../styles/Home.module.css";
-import { myLoader } from "../components/shared/customImageLoader";
 import { Fable1 } from "../components/chapters/1";
 import { Fable2 } from "../components/chapters/2";
 import { Fable3 } from "../components/chapters/3";
@@ -17,6 +14,12 @@ import { Fable9 } from "../components/chapters/9";
 import { Fable10 } from "../components/chapters/10";
 import BasicLayout from "layout/Basic";
 import { MainLayout } from "layout/MainLayout";
+import { navOptions } from "data/navOptions";
+import React, { useRef } from "react";
+
+import { gsap } from "gsap/dist/gsap";
+import { ScrollToPlugin } from "gsap/dist/ScrollToPlugin";
+gsap.registerPlugin(ScrollToPlugin);
 
 const Title = styled.h1`
   color: red;
@@ -41,6 +44,14 @@ const SubTitle = styled.h2`
 `;
 
 const Home: NextPage = () => {
+  const sectionRefs = useRef<Record<number, HTMLDivElement>>({});
+
+  const addToRefs = (el: any, key: number) => {
+    if (el && !sectionRefs.current[key]) {
+      sectionRefs.current[key] = el;
+    }
+  };
+
   return (
     <>
       <Head>
@@ -49,21 +60,41 @@ const Home: NextPage = () => {
       </Head>
 
       <BasicLayout>
-        <MainLayout>
-          <main>
-            <Title>The Richest Man In Babylon</Title>
-            <SubTitle>George S. Clason</SubTitle>
-
-            <Fable1 title={"1"} />
-            <Fable2 title={"2"} />
-            <Fable3 title={"3"} />
-            <Fable4 title={"4"} />
-            <Fable5 title={"5"} />
-            <Fable6 title={"6"} />
-            <Fable7 title={"7"} />
-            <Fable8 title={"8"} />
-            <Fable9 title={"9"} />
-            <Fable10 title={"10"} />
+        <MainLayout sectionRefs={sectionRefs}>
+          <main id="main-panel">
+            <nav id="left-overview">
+              <ul>
+                {navOptions.map((i, idx) => {
+                  return (
+                    <li
+                      key={i.name}
+                      onClick={() => {
+                        gsap.to(window, {
+                          duration: 2,
+                          scrollTo: sectionRefs.current[i.key].offsetTop - 10,
+                        });
+                      }}
+                    >
+                      {i.name}
+                    </li>
+                  );
+                })}
+              </ul>
+            </nav>
+            <div id="right-content">
+              <Title>The Richest Man In Babylon</Title>
+              <SubTitle>George S. Clason</SubTitle>
+              <Fable1 title={"1"} ref={(el) => addToRefs(el, 1)} />
+              <Fable2 title={"2"} ref={(el) => addToRefs(el, 2)} />
+              <Fable3 title={"3"} ref={(el) => addToRefs(el, 3)} />
+              <Fable4 title={"4"} ref={(el) => addToRefs(el, 4)} />
+              <Fable5 title={"5"} ref={(el) => addToRefs(el, 5)} />
+              <Fable6 title={"6"} ref={(el) => addToRefs(el, 6)} />
+              <Fable7 title={"7"} ref={(el) => addToRefs(el, 7)} />
+              <Fable8 title={"8"} ref={(el) => addToRefs(el, 8)} />
+              <Fable9 title={"9"} ref={(el) => addToRefs(el, 9)} />
+              <Fable10 title={"10"} ref={(el) => addToRefs(el, 10)} />
+            </div>
           </main>
         </MainLayout>
       </BasicLayout>

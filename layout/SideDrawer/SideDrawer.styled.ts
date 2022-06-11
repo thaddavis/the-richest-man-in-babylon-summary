@@ -13,15 +13,15 @@ export const SideDrawerStyled = styled.div<Pick<StyledProps, "isOpen">>`
   left: 0;
   background-color: #111;
   overflow-x: hidden;
-  padding-top: 60px; 
+  padding-top: 60px;
   transition: 0.5s;
 
-  ul {
-    li {
+  #side-drawer ul {
+    & li {
       cursor: pointer;
       padding: 8px 8px 8px 32px;
       text-decoration: none;
-      font-size: 25px;
+      font-size: 1.5rem;
       color: #818181;
       display: block;
       transition: 0.3s;
@@ -34,14 +34,13 @@ export const SideDrawerStyled = styled.div<Pick<StyledProps, "isOpen">>`
     color: #f1f1f1;
   }
 
-  .nav-options {
-      margin-top 32px;
-      color: white;
+  #nav-options {
+    margin-top 16px;
+    color: white;
   }
-  
+
   padding-top: 15px;
   font-size: 18px;
-  
 
   @media only screen and (min-width: ${(props) => props.theme.breakpoints.md}) {
     width: ${(props) => (props.isOpen ? "50%" : "0%")};

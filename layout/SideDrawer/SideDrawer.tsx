@@ -1,16 +1,19 @@
 import { navOptions } from "data/navOptions";
-import { Button } from "layout/MainLayout.styled";
-import { FaTimes } from "react-icons/fa";
-import React, { Dispatch, SetStateAction } from "react";
+import React, { Dispatch, MutableRefObject, SetStateAction } from "react";
 import { SideDrawerStyled } from "./SideDrawer.styled";
 import { CloseButtonStyled } from "./CloseButton.styled";
+
+import { gsap } from "gsap/dist/gsap";
+import { ScrollToPlugin } from "gsap/dist/ScrollToPlugin";
+gsap.registerPlugin(ScrollToPlugin);
 
 interface P {
   isOpen: boolean;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
+  sectionRefs: MutableRefObject<Record<number, HTMLDivElement>>;
 }
 
-export function SideDrawer({ isOpen, setIsOpen }: P) {
+export function SideDrawer({ isOpen, setIsOpen, sectionRefs }: P) {
   return (
     <>
       <SideDrawerStyled isOpen={isOpen}>
@@ -28,20 +31,25 @@ export function SideDrawer({ isOpen, setIsOpen }: P) {
             <span></span>
           </CloseButtonStyled>
         </div>
-        <ul className="nav-options">
-          {navOptions.map((i, idx) => {
-            return (
-              <li
-                key={idx}
-                onClick={() => {
-                  console.log("___ --- ___");
-                }}
-              >
-                {i.name}
-              </li>
-            );
-          })}
-        </ul>
+        <nav id="side-drawer">
+          <ul>
+            {navOptions.map((i, idx) => {
+              return (
+                <li
+                  key={i.name}
+                  onClick={() => {
+                    gsap.to(window, {
+                      duration: 2,
+                      scrollTo: sectionRefs.current[i.key].offsetTop - 10,
+                    });
+                  }}
+                >
+                  {i.name}
+                </li>
+              );
+            })}
+          </ul>
+        </nav>
       </SideDrawerStyled>
     </>
   );

@@ -5,15 +5,20 @@ import { LessonStyled } from "styled/Lesson.styled";
 
 interface P {
   title: string;
+  ref: React.Ref<HTMLElement>;
 }
 
-export function Fable4({ title }: P) {
+const Fable4 = React.forwardRef<HTMLDivElement, P>((props, ref) => {
   return (
-    <LessonStyled>
-      <h2>{title}</h2>
+    <LessonStyled ref={ref}>
+      <h2>{props.title}</h2>
       <div className="section">
         <List listData={ListOfLessonsInFable4} />
       </div>
     </LessonStyled>
   );
-}
+});
+
+Fable4.displayName = "Fable4";
+
+export { Fable4 };

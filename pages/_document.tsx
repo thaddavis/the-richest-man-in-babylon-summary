@@ -27,10 +27,10 @@ export default class MyDocument extends Document {
       return {
         ...initialProps,
         styles: [
-          <>
+          <div key={"styles"}>
             {initialProps.styles}
             {sheet.getStyleElement()}
-          </>,
+          </div>,
         ],
       };
     } finally {

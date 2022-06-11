@@ -3,16 +3,21 @@ import { LessonStyled } from "styled/Lesson.styled";
 
 interface P {
   title: string;
+  ref: React.Ref<HTMLElement>;
 }
 
-export function Fable9({ title }: P) {
+const Fable9 = React.forwardRef<HTMLDivElement, P>((props, ref) => {
   return (
-    <LessonStyled>
-      <h2>{title}</h2>
+    <LessonStyled ref={ref}>
+      <h2>{props.title}</h2>
       <p>
         If you have debts then allocate at least 20% of your earnings towards
         paying them.
       </p>
     </LessonStyled>
   );
-}
+});
+
+Fable9.displayName = "Fable9";
+
+export { Fable9 };

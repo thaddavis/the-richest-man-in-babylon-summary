@@ -1,41 +1,52 @@
-import React, { useState } from "react";
-import styled from "styled-components";
+import React, { MutableRefObject, useState } from "react";
 
 import { AiOutlineMenu } from "react-icons/ai";
 import { BsSuitHeart } from "react-icons/bs";
 
 import { SideDrawer } from "./SideDrawer/SideDrawer";
-import { Button, MainLayoutStyled } from "./MainLayout.styled";
-import { Backdrop } from "./Backdrop/Backdrop";
+import { MenuButton, MainLayoutStyled, LogoButton } from "./MainLayout.styled";
+import { Backdrop } from "layout/Backdrop/Backdrop";
 import { useMountTransition } from "hooks/useMountTransition";
 
 interface P {
   children: React.ReactNode;
+  sectionRefs: MutableRefObject<Record<number, HTMLDivElement>>;
 }
 
 export const MainLayout = (props: P) => {
   const [isOpen, setIsOpen] = useState(false);
-
   const hasTransitionedIn = useMountTransition(isOpen, 1000);
+  const { sectionRefs } = props;
 
   return (
     <MainLayoutStyled>
-      <SideDrawer isOpen={isOpen} setIsOpen={setIsOpen} />
-      {(hasTransitionedIn || isOpen) && (
-        <Backdrop isOpen={isOpen} onClick={() => setIsOpen(false)} />
-      )}
+      <section id="side-drawer">
+        <SideDrawer
+          sectionRefs={sectionRefs}
+          isOpen={isOpen}
+          setIsOpen={setIsOpen}
+        />
+        {/* {(hasTransitionedIn || isOpen) && (
+          <Backdrop isOpen={isOpen} onClick={() => setIsOpen(false)} />
+        )} */}
+      </section>
+
       <header>
-        <Button
+        <MenuButton
           role={"button"}
           onClick={() => {
             setIsOpen(!isOpen);
           }}
         >
           <AiOutlineMenu />
-        </Button>
+        </MenuButton>
+
+        <LogoButton role={"button"} onClick={() => {}}>
+          CMD
+        </LogoButton>
       </header>
 
-      <div>{props.children}</div>
+      {props.children}
 
       <footer>
         <span

@@ -3,12 +3,13 @@ import { LessonStyled } from "styled/Lesson.styled";
 
 interface P {
   title: string;
+  ref: React.Ref<HTMLElement>;
 }
 
-export function Fable7({ title }: P) {
+const Fable7 = React.forwardRef<HTMLDivElement, P>((props, ref) => {
   return (
-    <LessonStyled>
-      <h2>{title}</h2>
+    <LessonStyled ref={ref}>
+      <h2>{props.title}</h2>
       <p>
         As you gain wealth, you must invest in protecting it from those who wish
         to take it. Protect it with security, insurance, and dependable
@@ -16,4 +17,8 @@ export function Fable7({ title }: P) {
       </p>
     </LessonStyled>
   );
-}
+});
+
+Fable7.displayName = "Fable7";
+
+export { Fable7 };
