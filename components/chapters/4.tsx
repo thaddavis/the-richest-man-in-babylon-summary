@@ -12,9 +12,11 @@ interface P {
 const Fable4 = React.forwardRef<HTMLDivElement, P>((props, ref) => {
   return (
     <LessonStyled id={props.id} ref={ref}>
-      <h2>{props.title}</h2>
-      <div className="section">
-        <List listData={ListOfLessonsInFable4} />
+      <div className="lesson">
+        <h2>{props.title}</h2>
+        <div className="section">
+          <List listData={ListOfLessonsInFable4} />
+        </div>
       </div>
     </LessonStyled>
   );

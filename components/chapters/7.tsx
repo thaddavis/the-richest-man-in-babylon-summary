@@ -10,12 +10,14 @@ interface P {
 const Fable7 = React.forwardRef<HTMLDivElement, P>((props, ref) => {
   return (
     <LessonStyled id={props.id} ref={ref}>
-      <h2>{props.title}</h2>
-      <p>
-        As you gain wealth, you must invest in protecting it from those who wish
-        to take it. Protect it with security, insurance, and dependable
-        investments.
-      </p>
+      <div className="lesson">
+        <h2>{props.title}</h2>
+        <p>
+          As you gain wealth, you must invest in protecting it from those who
+          wish to take it. Protect it with security, insurance, and dependable
+          investments.
+        </p>
+      </div>
     </LessonStyled>
   );
 });

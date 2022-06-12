@@ -9,8 +9,13 @@ export const MainLayoutStyled = styled.div`
     flex: 1;
     padding: 1em 0.6em;
     border-bottom: 1px solid #eaeaea;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
+
+    @media only screen and (min-width: ${(props) =>
+      props.theme.breakpoints.xl}) {
+      justify-content: flex-start;
+    }
   }
 
   @media only screen and (min-width: ${(props) => props.theme.breakpoints.xl}) {
@@ -122,8 +127,6 @@ export const MenuButton = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: -apple-system, system-ui, "Segoe UI", Helvetica, Arial,
-    sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
   font-size: 14px;
   font-weight: 500;
   line-height: 20px;
@@ -194,8 +197,6 @@ export const LogoButton = styled.button`
   cursor: pointer;
   justify-content: center;
   align-items: center;
-  font-family: -apple-system, system-ui, "Segoe UI", Helvetica, Arial,
-    sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
   font-size: 14px;
   font-weight: 500;
   line-height: 20px;

@@ -1,4 +1,9 @@
-import React, { MutableRefObject, useState } from "react";
+import React, {
+  Dispatch,
+  MutableRefObject,
+  SetStateAction,
+  useState,
+} from "react";
 
 import { AiOutlineMenu } from "react-icons/ai";
 import { BsSuitHeart } from "react-icons/bs";
@@ -10,14 +15,16 @@ import { useMountTransition } from "hooks/useMountTransition";
 
 interface P {
   children: React.ReactNode;
-  sectionRefs: MutableRefObject<Record<number, HTMLDivElement>>;
+  sectionRefs: MutableRefObject<Record<string, HTMLDivElement>>;
   currentSection: string | undefined;
+  isOpen: boolean;
+  setIsOpen: Dispatch<SetStateAction<boolean>>;
 }
 
 export const MainLayout = (props: P) => {
-  const [isOpen, setIsOpen] = useState(false);
+  const { sectionRefs, currentSection, isOpen, setIsOpen } = props;
+
   const hasTransitionedIn = useMountTransition(isOpen, 1000);
-  const { sectionRefs, currentSection } = props;
 
   return (
     <MainLayoutStyled>

@@ -36,6 +36,19 @@ const SectionHeader = styled.div`
 
   margin-bottom: 4em;
 
+  h3 {
+    font-family: Anton;
+    font-style: italic;
+    padding: 1em;
+    padding-bottom: 0em;
+    font-size: 4vmin;
+
+    @media only screen and (min-width: ${(props) =>
+        props.theme.breakpoints.md}) {
+      font-size: 2em;
+    }
+  }
+
   h1 {
     word-break: spaces;
     text-overflow: ellipsis;
@@ -44,6 +57,12 @@ const SectionHeader = styled.div`
     padding: 0.6em;
     padding-bottom: 0.2em;
     color: ${(props) => props.theme.colors.red};
+
+    @media only screen and (min-width: ${(props) =>
+        props.theme.breakpoints.md}) {
+      font-size: 4em;
+      margin-bottom: 0.5em;
+    }
   }
 
   h2 {
@@ -56,23 +75,15 @@ const SectionHeader = styled.div`
       font-size: 2em;
     }
   }
-
-  @media only screen and (min-width: ${(props) => props.theme.breakpoints.md}) {
-    h1 {
-      font-size: 4em;
-      margin-bottom: 0.5em;
-    }
-  }
 `;
 
 const Home: NextPage = () => {
   const sectionRefs = useRef<Record<string, HTMLDivElement>>({});
-
   const [currentSection, setCurrentSection] = useState<string>();
-
   useEffect(() => {
     createScrollTriggers(sectionRefs, currentSection, setCurrentSection);
   }, []);
+  const [isOpen, setIsOpen] = useState(false);
 
   const addToRefs = (el: any, key: number) => {
     if (el && !sectionRefs.current[key]) {
@@ -88,7 +99,12 @@ const Home: NextPage = () => {
       </Head>
 
       <BasicLayout>
-        <MainLayout currentSection={currentSection} sectionRefs={sectionRefs}>
+        <MainLayout
+          isOpen={isOpen}
+          setIsOpen={setIsOpen}
+          currentSection={currentSection}
+          sectionRefs={sectionRefs}
+        >
           <main id="main-panel">
             <nav id="left-overview">
               <ul>
@@ -117,6 +133,7 @@ const Home: NextPage = () => {
             <div id="right-content">
               <div id="overflow-wrapper">
                 <SectionHeader>
+                  <h3>CMD</h3>
                   <h1>The Richest Man In Babylon</h1>
                   <h2>George S. Clason</h2>
                 </SectionHeader>

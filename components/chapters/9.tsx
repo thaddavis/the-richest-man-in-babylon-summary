@@ -10,11 +10,13 @@ interface P {
 const Fable9 = React.forwardRef<HTMLDivElement, P>((props, ref) => {
   return (
     <LessonStyled id={props.id} ref={ref}>
-      <h2>{props.title}</h2>
-      <p>
-        If you have debts then allocate at least 20% of your earnings towards
-        paying them.
-      </p>
+      <div className="lesson">
+        <h2>{props.title}</h2>
+        <p>
+          If you have debts then allocate at least 20% of your earnings towards
+          paying them.
+        </p>
+      </div>
     </LessonStyled>
   );
 });

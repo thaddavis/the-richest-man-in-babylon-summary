@@ -16,7 +16,6 @@ export function createScrollTriggers(
         end: "bottom center",
         trigger: refs.current[i],
         onEnter: (i: any) => {
-          console.log(i.vars.trigger.id);
           setCurrentSection(i.vars.trigger.id);
         },
         onLeave(i: any) {},

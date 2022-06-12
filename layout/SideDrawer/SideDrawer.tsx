@@ -10,7 +10,7 @@ gsap.registerPlugin(ScrollToPlugin);
 interface P {
   isOpen: boolean;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
-  sectionRefs: MutableRefObject<Record<number, HTMLDivElement>>;
+  sectionRefs: MutableRefObject<Record<string, HTMLDivElement>>;
   currentSection: string | undefined;
 }
 
@@ -45,10 +45,14 @@ export function SideDrawer({
                   key={i.name}
                   className={currentSection === i.key ? "active" : ""}
                   onClick={() => {
+                    setIsOpen(false);
+
+                    const key: string = i.key;
+
                     gsap.to(window, {
                       duration: 2,
                       scrollTo:
-                        sectionRefs.current[i.key].offsetTop -
+                        sectionRefs.current[key].offsetTop -
                         (document.getElementById("header")
                           ? document.getElementById("header")!.clientHeight
                           : 72),

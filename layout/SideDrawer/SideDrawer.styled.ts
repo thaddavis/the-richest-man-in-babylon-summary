@@ -6,7 +6,7 @@ interface StyledProps {
 
 export const SideDrawerStyled = styled.div<Pick<StyledProps, "isOpen">>`
   height: 100%;
-  width: ${(props) => (props.isOpen ? "70%" : "0%")};
+  width: ${(props) => (props.isOpen ? "80%" : "0%")};
   position: fixed;
   z-index: 2000;
   top: 0;

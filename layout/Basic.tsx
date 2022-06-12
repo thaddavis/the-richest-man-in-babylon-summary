@@ -8,8 +8,6 @@ export const GlobalStyle = createGlobalStyle`
   // this is the shared style
   html {
     box-sizing: border-box;
-
-    font-family: Arial, Helvetica, sans-serif;
   }
 
   *,
@@ -22,7 +20,7 @@ export const GlobalStyle = createGlobalStyle`
   ${reset}
 
   body {
-    font-family: 'Arvo', Arial, Helvetica, sans-serif;
+    font-family: 'Arvo', Helvetica, Arial, sans-serif;
   }
 
   /* width */
